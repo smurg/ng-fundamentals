@@ -6,8 +6,12 @@ import { AppComponent } from './app.component';
 import { EventsListComponent } from './events/events-list.component';
 import { EventThumbnailComponent } from './events/event-thumbnail.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { EventService } from './events/shared/events.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
+import { CreateEventComponent } from './events/create-event/create-event.component';
+import { E404Component } from './errors/e404.component';
+
+import { EventService } from './events/shared/events.service';
+import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
 import { appRoutes } from './routes';
 
 @NgModule({
@@ -16,13 +20,15 @@ import { appRoutes } from './routes';
     EventsListComponent,
     EventThumbnailComponent,
     NavBarComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    CreateEventComponent,
+    E404Component
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [EventService],
+  providers: [EventService, EventRouteActivatorService],
   bootstrap: [AppComponent]
 })
 /*
