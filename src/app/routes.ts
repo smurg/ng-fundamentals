@@ -14,4 +14,6 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: '/events', pathMatch: 'full' }
 ];
 /* it's an array of Route objects:
-if the url match '/events' show the component EventsListComponent */
+if the url match '/events' show the component EventsListComponent
+
+canActivate: allows us to determine wheater or not a user can navigate to a route */
