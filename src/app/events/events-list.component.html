@@ -1,0 +1,18 @@
+<div>
+  <h1> Upcoming Angular Events </h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-5" *ngFor="let event of events">
+      <event-thumbnail (clicked)="handleClick($event)" [event]="event">
+      </event-thumbnail>
+      <!-- with [event]=  we are saying this event-thumbnail component 
+                      has an input parameter named event, and we want to pass the 
+                      value from event1 of this component to that one. 
+          
+          *ngFor will create an event-thumbnail component for each event object inside events array.
+          - let event:  The let keyword before event creates a template input variable called event. 
+                    
+          #thumbnail is a variable pointing to event-thumbnail component   -->
+    </div>
+  </div>
+</div>
