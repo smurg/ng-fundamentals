@@ -14,7 +14,8 @@ export const appRoutes: Routes = [
   { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
   { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivatorService] },
   { path: '404', component: E404Component },
-  { path: '', redirectTo: '/events', pathMatch: 'full' }
+  { path: '', redirectTo: '/events', pathMatch: 'full' },
+  { path: 'user', loadChildren: './user/user.module#UserModule' }
 ];
 /*
 it's an array of Route objects:
@@ -25,4 +26,5 @@ canDeactivate: to prevent a user from leaving a page. It's useful if you want to
                to navigate away from a page before saving data.
 resolve: Its an object. Before resolving this route, call this EventListResolver and when that resolver
         finishes and returned some data, add this data to the route as a property named EVENTS.
+loadChildren: to load a child module (with bunch of components/routes inside) and use lazy loading.
  */
