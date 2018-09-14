@@ -12,6 +12,7 @@ import { E404Component } from './errors/e404.component';
 
 import { EventService } from './events/shared/events.service';
 import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
+import { EventListResolver } from './events/events-list-resolver.service';
 import { appRoutes } from './routes';
 
 @NgModule({
@@ -28,7 +29,15 @@ import { appRoutes } from './routes';
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [EventService, EventRouteActivatorService],
+  providers: [
+    EventService,
+    EventRouteActivatorService,
+    EventListResolver,
+    {
+      provide: 'canDeactivateCreateEvent',
+      useValue: checkDirtyState
+    }
+  ],
   bootstrap: [AppComponent]
 })
 /*
@@ -40,7 +49,17 @@ declarations: when you wanna add a component, pipe or directive we must declare 
 imports:    Used to import other modules. BrowserModule will give access to a lot of built in angular features.
 
 Providers:  is to declare the services that this module will use.
+            - We can also define functions as providers. For example to check when activate/deactivate routes
 
 bootstrap:  declares which component will be the initial to load.
 */
 export class AppModule { }
+
+export function checkDirtyState(component: CreateEventComponent) {
+  // the first parameter this function(canDeactivate) receives is the component loaded on that route!
+  if (component.isDirty) {
+    // we can display a modal to show a confirmation message
+    return window.confirm('you have not saved this event, do you really want to cancel?');
+  }
+  return true;
+}

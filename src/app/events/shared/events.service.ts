@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
-
+import { Subject } from 'rxjs';
 /* Always it's important to mark Services as Injectable! when we are going to use other services like Http
 
 REMEMber to add it as a provider in the module it will be used! */
 @Injectable()
 export class EventService {
   getEvents() {
-    return EVENTS;
+    const subject = new Subject();
+    setTimeout(() => {
+      subject.next(EVENTS);
+      subject.complete();
+    }, 1000); // simulate async
+    /*
+     Subject is an observable from rxjs.
+      Observables: are like streams of data. They are kind of arrays where the data arrives over time.
+    */
+    return subject;
   }
 
   getEvent(id: number) {
