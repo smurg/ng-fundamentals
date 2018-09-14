@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../shared/events.service';
 import { ActivatedRoute } from '@angular/router';
+import { IEvent } from '../shared/event.model';
 /*
 Activated route
 The route path and parameters are available through an injected router service called the ActivatedRoute.
@@ -19,7 +20,7 @@ export class EventDetailsComponent implements OnInit {
 
   URL: events/:event_id
   When this page is loaded we will get the event from the service */
-  event: any;
+  event: IEvent;
 
   constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
