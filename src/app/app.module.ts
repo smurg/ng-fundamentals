@@ -14,6 +14,7 @@ import { EventService } from './events/shared/events.service';
 import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
 import { EventListResolver } from './events/events-list-resolver.service';
 import { appRoutes } from './routes';
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { appRoutes } from './routes';
     EventService,
     EventRouteActivatorService,
     EventListResolver,
+    AuthService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
@@ -50,6 +52,7 @@ imports:    Used to import other modules. BrowserModule will give access to a lo
 
 Providers:  is to declare the services that this module will use.
             - We can also define functions as providers. For example to check when activate/deactivate routes
+            - PROVIDERS ARE SHARED BETWEEN ALL MODULES.
 
 bootstrap:  declares which component will be the initial to load.
 */
