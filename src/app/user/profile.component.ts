@@ -1,18 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  template: `
-    <h1>Edit Your Profile</h1>
-    <hr>
-    <div class="col-md-6">
-      <h3>[Edit profile form will go here]</h3>
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-default">Cancel</button>
-    </div>
-  `,
+  templateUrl: './profile.component.html',
 })
-export class ProfileComponent {
 
+/*
+  This will be a reactive form: It's better to do validations with js
+*/
+
+export class ProfileComponent implements OnInit {
+  profileForm: FormGroup;
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit(): void {
+    const firstName = new FormControl(this.authService.currentUser.firstName,
+                          Validators.required); // we can pass an array of validators
+    const lastName = new FormControl(this.authService.currentUser.lastName,
+                          Validators.required);
+    // but which html element they correspond to?
+    // we set formControlName into component HTML
+    this.profileForm = new FormGroup({
+      firstName,
+      lastName
+    });
+  }
+
+  saveProfile(formValues) {
+    if (this.profileForm.valid) {
+      this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+      this.router.navigate(['events']);
+    }
+  }
+
+  cancel() {
+    this.router.navigate(['events']);
+  }
 }

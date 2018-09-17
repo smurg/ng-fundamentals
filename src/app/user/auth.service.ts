@@ -19,4 +19,9 @@ export class AuthService {
     return !!this.currentUser;
     // cast to boolean and return false if there isn't any current user
   }
+
+  updateCurrentUser(firstName: string, lastName: string) {
+    this.currentUser.firstName = firstName;
+    this.currentUser.lastName = lastName;
+  }
 }
