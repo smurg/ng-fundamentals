@@ -9,6 +9,7 @@ import { NavBarComponent } from './nav/navbar.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { E404Component } from './errors/e404.component';
+import { CreateSessionComponent } from './events/event-details/create-session.component';
 // we can use barrel files to reduce the import lines: https://medium.com/@adrianfaciu/barrel-files-to-use-or-not-to-use-75521cd18e65
 import { EventService } from './events/shared/events.service';
 import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
@@ -23,6 +24,7 @@ import { AuthService } from './user/auth.service';
     EventThumbnailComponent,
     NavBarComponent,
     EventDetailsComponent,
+    CreateSessionComponent,
     CreateEventComponent,
     E404Component
   ],
