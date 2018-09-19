@@ -2,6 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { EventService } from './events/shared/events.service';
+import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
+import { EventListResolver } from './events/events-list-resolver.service';
+import { appRoutes } from './routes';
+import { AuthService } from './user/auth.service';
+
 import { AppComponent } from './app.component';
 import { EventsListComponent } from './events/events-list.component';
 import { EventThumbnailComponent } from './events/event-thumbnail.component';
@@ -11,11 +17,8 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
 import { E404Component } from './errors/e404.component';
 import { CreateSessionComponent } from './events/event-details/create-session.component';
 // we can use barrel files to reduce the import lines: https://medium.com/@adrianfaciu/barrel-files-to-use-or-not-to-use-75521cd18e65
-import { EventService } from './events/shared/events.service';
-import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
-import { EventListResolver } from './events/events-list-resolver.service';
-import { appRoutes } from './routes';
-import { AuthService } from './user/auth.service';
+import { SessionListComponent } from './events/event-details/session-list.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,10 +29,13 @@ import { AuthService } from './user/auth.service';
     EventDetailsComponent,
     CreateSessionComponent,
     CreateEventComponent,
+    SessionListComponent,
     E404Component
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

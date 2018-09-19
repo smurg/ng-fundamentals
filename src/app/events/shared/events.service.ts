@@ -6,6 +6,7 @@ import { IEvent } from './event.model';
 REMEMber to add it as a provider in the module it will be used! */
 @Injectable()
 export class EventService {
+
   getEvents(): Observable<IEvent[]> {
     const subject = new Subject<IEvent[]>();
     setTimeout(() => {
@@ -21,6 +22,11 @@ export class EventService {
 
   getEvent(id: number): IEvent {
     return EVENTS.find(event => event.id === id);
+  }
+
+  updateEvent(event: IEvent): any {
+    const index = EVENTS.findIndex(x => x.id === event.id);
+    EVENTS[index] = event;
   }
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../shared/events.service';
 import { ActivatedRoute } from '@angular/router';
-import { IEvent } from '../shared/event.model';
+import { IEvent, ISession } from '../shared/event.model';
 /*
 Activated route
 The route path and parameters are available through an injected router service called the ActivatedRoute.
@@ -21,6 +21,7 @@ export class EventDetailsComponent implements OnInit {
   URL: events/:event_id
   When this page is loaded we will get the event from the service */
   event: IEvent;
+  addMode = false;
 
   constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
@@ -40,5 +41,22 @@ export class EventDetailsComponent implements OnInit {
     You can access the parameters directly without subscribing or adding observable operators.
     It's much simpler to write and read.
     */
+  }
+
+  addSession() {
+    this.addMode = true;
+  }
+
+  saveNewSession(session: ISession) { // the event it's passed in, is the session object
+    // the next id setting could be done on the api:
+    const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
+    session.id = nextId + 1;
+    this.event.sessions.push(session);
+    this.eventService.updateEvent(this.event);
+    this.addMode = false;
+  }
+
+  cancelAddSession() {
+    this.addMode = false;
   }
 }

@@ -23,5 +23,16 @@
         <br /> {{event?.location?.city}}, {{event?.location?.country}}
       </address>
     </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <h3 style="margin:0">Sessions </h3>
+      </div>
+      <div class="col-md-2">
+        <a (click)="addSession()">add session</a>
+      </div>
+    </div> <!-- when using eventEmmiter we need to put the $event as a parameter un the function we bind -->
+    <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
+    <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
   </div>
 </div>
