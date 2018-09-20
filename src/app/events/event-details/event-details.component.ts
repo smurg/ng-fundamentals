@@ -12,6 +12,7 @@ The route path and parameters are available through an injected router service c
   styles: [`
     .container { padding: 0 20px; }
     .event-image { height: 100px; }
+    .filter-by { margin: 0 20px; }
   `]
 })
 export class EventDetailsComponent implements OnInit {
@@ -22,6 +23,8 @@ export class EventDetailsComponent implements OnInit {
   When this page is loaded we will get the event from the service */
   event: IEvent;
   addMode = false;
+  filterBy = 'all'; // default filterBy selection <- session-list component will be in charge of filter
+  sortBy = 'name';
 
   constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
@@ -41,6 +44,12 @@ export class EventDetailsComponent implements OnInit {
     You can access the parameters directly without subscribing or adding observable operators.
     It's much simpler to write and read.
     */
+  }
+  updateFilterBy(filter) {
+    this.filterBy = filter;
+  }
+  updateSort(sort) {
+    this.sortBy = sort;
   }
 
   addSession() {

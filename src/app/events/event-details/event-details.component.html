@@ -24,15 +24,28 @@
       </address>
     </div>
     <hr>
-    <div class="row">
+    <div class="row" style="margin-bottom: 10px">
       <div class="col-md-2">
         <h3 style="margin:0">Sessions </h3>
+      </div>
+      <div class="col-md-7">
+        <div class="btn-group btn-group-sm filter-by">
+          <button class="btn btn-default" [class.active]="sortBy === 'name'" (click)="updateSort('name')">By Name</button>
+          <button class="btn btn-default" [class.active]="sortBy === 'votes'" (click)="updateSort('votes')">By Votes</button>
+        </div>
+
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-default" [class.active]="filterBy === 'all'" (click)="updateFilterBy('all')">All</button>
+          <button class="btn btn-default" [class.active]="filterBy === 'beginner'" (click)="updateFilterBy('beginner')">Beginner</button>
+          <button class="btn btn-default" [class.active]="filterBy === 'intermediate'" (click)="updateFilterBy('intermediate')">Intermediate</button>
+          <button class="btn btn-default" [class.active]="filterBy === 'advanced'" (click)="updateFilterBy('advanced')">Advanced</button>
+        </div>
       </div>
       <div class="col-md-2">
         <a (click)="addSession()">add session</a>
       </div>
     </div> <!-- when using eventEmmiter we need to put the $event as a parameter un the function we bind -->
     <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
-    <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
+    <session-list *ngIf="!addMode" [filterBy]="filterBy" [sortBy]="sortBy" [sessions]="event?.sessions"></session-list>
   </div>
 </div>
