@@ -1,0 +1,10 @@
+<div (click)="toggleContent()" class="well pointable">
+    <h4 class="well-title">{{title}}</h4>
+    <!-- content goes here! 
+        ng-content: is a special component from Angular that tells where to put the content from outside 
+        <collapsible-well [title]="session.name">
+          <h6>{{session.presenter}}</h6>  <- this content!!!!
+        </collapsible-well>
+    -->
+    <ng-content *ngIf="visible"></ng-content>
+</div>

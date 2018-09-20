@@ -3,7 +3,7 @@
     <!-- remember we pass parameter to component with [someParameter]-->
     <collapsible-well [title]="session.name">
       <h6>{{session.presenter}}</h6>
-      <span>Duration: {{session.duration}}</span>
+      <span>Duration: {{session.duration | duration}}</span>
       <br />
       <span>Level: {{session.level}}</span>
       <p>{{session.abstract}}</p>

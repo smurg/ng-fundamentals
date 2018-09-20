@@ -19,6 +19,8 @@ import { CreateSessionComponent } from './events/event-details/create-session.co
 // we can use barrel files to reduce the import lines: https://medium.com/@adrianfaciu/barrel-files-to-use-or-not-to-use-75521cd18e65
 import { SessionListComponent } from './events/event-details/session-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CollapsibleWellComponent } from './common/collapsible-well.component';
+import { DurationPipe } from './events/shared/duration.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CreateSessionComponent,
     CreateEventComponent,
     SessionListComponent,
+    CollapsibleWellComponent,
+    DurationPipe,
     E404Component
   ],
   imports: [
@@ -52,7 +56,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 })
 /*
 we have to register all of our components within the modules
-declarations: when you wanna add a component, pipe or directive we must declare it inside that array.
+declarations: when you wanna add a COMPONENT, PIPE or DIRECTIVE we must declare it inside that array.
             First importing it and then adding it to the array, like AppComponent.
             If the component is not declared there, you will have an error when using it!!!!
 
