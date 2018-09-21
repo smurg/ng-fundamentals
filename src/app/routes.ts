@@ -29,4 +29,9 @@ canDeactivate: to prevent a user from leaving a page. It's useful if you want to
 resolve: Its an object. Before resolving this route, call this EventListResolver and when that resolver
         finishes and returned some data, add this data to the route as a property named EVENTS.
 loadChildren: to load a child module (with bunch of components/routes inside) and use lazy loading.
+
+Lazy Loading - loadChildren property:
+If we have a multi-modular application, implementing a lazy loading feature is recommended.
+The great advantage of a lazy loading approach is that we can load our resources on demand and
+not all at once. This helps us in decreasing the startup time.
  */

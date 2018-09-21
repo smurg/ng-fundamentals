@@ -7,6 +7,7 @@ import { EventRouteActivatorService } from './events/shared/event-route-activato
 import { EventListResolver } from './events/events-list-resolver.service';
 import { appRoutes } from './routes';
 import { AuthService } from './user/auth.service';
+import { JQ_TOKEN } from './common/jquery.service';
 
 import { AppComponent } from './app.component';
 import { EventsListComponent } from './events/events-list.component';
@@ -21,6 +22,8 @@ import { SessionListComponent } from './events/event-details/session-list.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { DurationPipe } from './events/shared/duration.pipe';
+
+const jQuery = window['$'];
 
 @NgModule({
   declarations: [
@@ -50,6 +53,10 @@ import { DurationPipe } from './events/shared/duration.pipe';
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
+    },
+    {
+      provide: JQ_TOKEN,
+      useValue: jQuery
     }
   ],
   bootstrap: [AppComponent]

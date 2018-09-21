@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { IEvent } from './event.model';
+import { IEvent, ISession } from './event.model';
 /* Always it's important to mark Services as Injectable! when we are going to use other services like Http
 
 REMEMber to add it as a provider in the module it will be used! */
@@ -27,6 +27,29 @@ export class EventService {
   updateEvent(event: IEvent): any {
     const index = EVENTS.findIndex(x => x.id === event.id);
     EVENTS[index] = event;
+  }
+
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    const term = searchTerm.toLocaleLowerCase();
+    let results: ISession[] = [];
+
+    EVENTS.forEach(event => {
+      let matchingSessions = event.sessions.filter(
+        session => session.name.toLocaleLowerCase().indexOf(term) > -1
+      ); // filter all sessions that contains inside the name the term we are searching
+      matchingSessions = matchingSessions.map((session: any) => {
+        session.eventId = event.id; // we are adding this attr to know from which event corresponds
+        return session;
+      });
+      results = results.concat(matchingSessions);
+    });
+
+    const subject = new Subject<ISession[]>();
+    setTimeout(() => {
+      subject.next(results);
+      subject.complete();
+    }, 500); // simulate async
+    return subject;
   }
 }
 
