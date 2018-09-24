@@ -24,6 +24,7 @@ import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { DurationPipe } from './events/shared/duration.pipe';
 import { UpvoteComponent } from './events/event-details/upvote.component';
 import { VoterService } from './events/event-details/voter.service';
+import { LocationValidator } from './events/create-event/location-validator.directive';
 
 const jQuery = window['$'];
 
@@ -40,6 +41,7 @@ const jQuery = window['$'];
     CollapsibleWellComponent,
     UpvoteComponent,
     DurationPipe,
+    LocationValidator,
     E404Component
   ],
   imports: [
