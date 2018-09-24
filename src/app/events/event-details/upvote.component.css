@@ -29,3 +29,7 @@
   font-weight: bold;
   font-size: 14px;
 }
+
+.votingButton i.glyphicon-red {
+  color: red;
+}
