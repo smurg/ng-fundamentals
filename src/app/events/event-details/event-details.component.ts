@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../shared/events.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { IEvent, ISession } from '../shared/event.model';
 /*
 Activated route
@@ -29,8 +29,15 @@ export class EventDetailsComponent implements OnInit {
   constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.forEach((params: Params) => {
+      this.event = this.eventService.getEvent(+params['id']);
+      /* we need to reset state of the component */
+      this.addMode = false;
+    });
+  /*
     this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
-    /* Why use route.snapshot?
+
+  Why use route.snapshot?
     Snapshot: the no-observable alternative
     This application won't re-use the EventDetailComponent. The user always returns to the event list
     to select another event to view. There's no way to navigate from one event detail to another event detail

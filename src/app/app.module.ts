@@ -22,6 +22,8 @@ import { SessionListComponent } from './events/event-details/session-list.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { DurationPipe } from './events/shared/duration.pipe';
+import { UpvoteComponent } from './events/event-details/upvote.component';
+import { VoterService } from './events/event-details/voter.service';
 
 const jQuery = window['$'];
 
@@ -36,6 +38,7 @@ const jQuery = window['$'];
     CreateEventComponent,
     SessionListComponent,
     CollapsibleWellComponent,
+    UpvoteComponent,
     DurationPipe,
     E404Component
   ],
@@ -50,6 +53,7 @@ const jQuery = window['$'];
     EventRouteActivatorService,
     EventListResolver,
     AuthService,
+    VoterService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState

@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ISession } from '../shared/event.model';
+import { AuthService } from '../../user/auth.service';
+import { VoterService } from './voter.service';
 
 @Component({
   selector: 'session-list',
@@ -13,7 +15,7 @@ export class SessionListComponent implements OnChanges {
   @Input() sortBy: string;
   filteredSessions: ISession[] = [];
 
-  constructor() { }
+  constructor(private auth: AuthService, private voterService: VoterService) { }
 
   ngOnChanges() {
     // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
@@ -23,6 +25,22 @@ export class SessionListComponent implements OnChanges {
       this.sortBy === 'name' ? this.filteredSessions.sort(sortByNameAsc)
                             :  this.filteredSessions.sort(sortByVotesDesc);
     }
+  }
+
+  toggleVote(session: ISession) {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(session, this.auth.currentUser.userName);
+    } else {
+      this.voterService.addVoter(session, this.auth.currentUser.userName);
+    }
+    // as we change votes of sessions we need to update the sorting
+    if (this.sortBy === 'votes') {
+      this.filteredSessions.sort(sortByVotesDesc);
+    }
+  }
+
+  userHasVoted(session: ISession) {
+    return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
   }
 
   filterSessions(filter: string): any {
