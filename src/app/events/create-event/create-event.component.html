@@ -23,9 +23,10 @@
       <input (ngModel)="price" name="price" required id="eventPrice" type="text" type="number" class="form-control" placeholder="event price..." />
     </div>
 
-    <div ngModelGroup="location" validateLocation>
+    <div ngModelGroup="location" validateLocation #locationGroup="ngModelGroup">
       <div class="form-group">
         <label for="address">Event Location:</label>
+        <em *ngIf="locationGroup?.invalid && locationGroup?.touched">You must enter either the full location OR an online Url.</em>
         <input [(ngModel)]="event.location.address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
       </div>
       <div class="row">
@@ -39,7 +40,10 @@
     </div>
     <div class="form-group">
       <label for="onlineUrl">Online Url:</label>
-      <input [(ngModel)]="event.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
+      <input [(ngModel)]="event.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" 
+      placeholder="Online Url..." (change)="locationGroup.control.controls.address.updateValueAndValidity()"/>
+      <!-- locationGroup: is a template ref and it can be accessed not only in the child elements but on sibilings.
+      onChange of onlineUrl, we are running the validations of the location -->
     </div>
 
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched}">
