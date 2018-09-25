@@ -11,6 +11,7 @@ import { VoterService } from './voter.service';
 export class SessionListComponent implements OnChanges {
   @Input() sessions: ISession[];  /* we tell angular to expect a value to be passed in to the component.
     Input decorator: tells angular that property will be passed in from another component */
+  @Input() eventId: number;
   @Input() filterBy: string;
   @Input() sortBy: string;
   filteredSessions: ISession[] = [];
@@ -29,9 +30,9 @@ export class SessionListComponent implements OnChanges {
 
   toggleVote(session: ISession) {
     if (this.userHasVoted(session)) {
-      this.voterService.deleteVoter(session, this.auth.currentUser.userName);
+      this.voterService.deleteVoter(this.eventId, session, this.auth.currentUser.userName);
     } else {
-      this.voterService.addVoter(session, this.auth.currentUser.userName);
+      this.voterService.addVoter(this.eventId, session, this.auth.currentUser.userName);
     }
     // as we change votes of sessions we need to update the sorting
     if (this.sortBy === 'votes') {

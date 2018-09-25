@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { EventService } from './events/shared/events.service';
-import { EventRouteActivatorService } from './events/shared/event-route-activator.service';
 import { EventListResolver } from './events/events-list-resolver.service';
 import { appRoutes } from './routes';
 import { AuthService } from './user/auth.service';
@@ -25,6 +25,7 @@ import { DurationPipe } from './events/shared/duration.pipe';
 import { UpvoteComponent } from './events/event-details/upvote.component';
 import { VoterService } from './events/event-details/voter.service';
 import { LocationValidator } from './events/create-event/location-validator.directive';
+import { EventResolver } from './events/event-resolver.service';
 
 const jQuery = window['$'];
 
@@ -48,12 +49,13 @@ const jQuery = window['$'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     EventService,
-    EventRouteActivatorService,
     EventListResolver,
+    EventResolver,
     AuthService,
     VoterService,
     {

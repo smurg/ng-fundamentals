@@ -46,6 +46,6 @@
       </div>
     </div> <!-- when using eventEmmiter we need to put the $event as a parameter un the function we bind -->
     <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
-    <session-list *ngIf="!addMode" [filterBy]="filterBy" [sortBy]="sortBy" [sessions]="event?.sessions"></session-list>
+    <session-list *ngIf="!addMode" [eventId]="event?.id" [filterBy]="filterBy" [sortBy]="sortBy" [sessions]="event?.sessions"></session-list>
   </div>
 </div>

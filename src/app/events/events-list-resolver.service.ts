@@ -13,6 +13,7 @@ export class EventListResolver implements Resolve<any> {
     If we use subscribe => we return a subscription not an OBSERVABLE.
     we need to use pipe, to do the processing when data is received and also return an Observable
     */
-    return this.eventService.getEvents().pipe(map(events => events));
+    return this.eventService.getEvents();
+    // pipe(map(events => events));
   }
 }
