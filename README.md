@@ -1,6 +1,15 @@
-# NgFundamentals
+# My Angular 6
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+
+## Description of the project
+
+This repository will hold a project I did in my path of learning Angular 6. 
+
+The main idea was to create an app to list events/meetups (angular events) with all the information (location, description, etc), and inside each event we have a list of sessions/talks (with it's duration, presenter, etc). Other than the listing, we can also create them.
+We also provide login/logout feature, with profile edition and allowing to do some tasks when logged in.
+
+In summary, it's a basic app, where we can list items, create them, we have different routes, and login.
 
 ## Development server
 
